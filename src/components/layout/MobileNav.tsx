@@ -6,7 +6,9 @@ import {
   Home, 
   HandHeart, 
   Bot,
-  Menu
+  Menu,
+  Bookmark,
+  Settings
 } from "lucide-react";
 import { useTheme } from "../core/ThemeProvider";
 import { cn } from "@/lib/utils";
@@ -95,7 +97,7 @@ const MobileNav = () => {
                 onClick={() => setOpen(false)}
                 className="flex flex-col items-center justify-center p-4 rounded-lg border"
               >
-                <BookOpen size={24} className="mb-1" />
+                <Bookmark size={24} className="mb-1" />
                 <span className="text-sm">Bookmarks</span>
               </Link>
               <Link 
@@ -103,7 +105,7 @@ const MobileNav = () => {
                 onClick={() => setOpen(false)}
                 className="flex flex-col items-center justify-center p-4 rounded-lg border"
               >
-                <BookOpen size={24} className="mb-1" />
+                <Settings size={24} className="mb-1" />
                 <span className="text-sm">Settings</span>
               </Link>
             </div>

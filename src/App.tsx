@@ -10,6 +10,7 @@ import PrayersPage from "./pages/PrayersPage";
 import ReadingsPage from "./pages/ReadingsPage";
 import AssistantPage from "./pages/AssistantPage";
 import BookmarksPage from "./pages/BookmarksPage";
+import SettingsPage from "./pages/SettingsPage";
 import NotFound from "./pages/NotFound";
 import Layout from "./components/layout/Layout";
 import React from "react";
@@ -34,6 +35,7 @@ const App = () => {
                   <Route path="/readings" element={<ReadingsPage />} />
                   <Route path="/assistant" element={<AssistantPage />} />
                   <Route path="/bookmarks" element={<BookmarksPage />} />
+                  <Route path="/settings" element={<SettingsPage />} />
                   <Route path="*" element={<NotFound />} />
                 </Route>
               </Routes>
