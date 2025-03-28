@@ -38,9 +38,9 @@ const AssistantPage = () => {
             
             <DialogClose asChild>
               <Button 
-                variant="ghost" 
+                variant="outline" 
                 size="icon" 
-                className="absolute right-4 top-4 rounded-full hover:bg-accent" 
+                className="absolute right-4 top-4 rounded-full z-50" 
                 aria-label="Close"
               >
                 <X className="h-5 w-5" />
