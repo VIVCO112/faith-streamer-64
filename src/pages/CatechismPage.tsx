@@ -1,5 +1,5 @@
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
@@ -7,9 +7,10 @@ import { ScrollArea } from "@/components/ui/scroll-area";
 import { getCatechismSections, searchCatechism, CatechismParagraph, CatechismSection } from "@/services/catechism-service";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Skeleton } from "@/components/ui/skeleton";
-import { BookOpen, Search, Share2 } from "lucide-react";
+import { BookOpen, Search, Share2, Upload } from "lucide-react";
 import { toast } from "sonner";
 import { useBookmarks } from "@/contexts/BookmarksContext";
+import { uploadAndParseCatechismPDF } from "@/services/pdf-parser-service";
 
 const CatechismPage = () => {
   const [sections, setSections] = useState<CatechismSection[]>([]);
@@ -19,6 +20,7 @@ const CatechismPage = () => {
   const [isSearching, setIsSearching] = useState(false);
   const [activeTab, setActiveTab] = useState("browse");
   const { addBookmark, hasBookmark } = useBookmarks();
+  const fileInputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
     const loadCatechism = async () => {
@@ -63,6 +65,31 @@ const CatechismPage = () => {
     
     toast.success("Catechism paragraph added to bookmarks");
   };
+  
+  const handleUploadClick = () => {
+    if (fileInputRef.current) {
+      fileInputRef.current.click();
+    }
+  };
+  
+  const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const files = e.target.files;
+    if (!files || files.length === 0) return;
+    
+    const file = files[0];
+    const success = await uploadAndParseCatechismPDF(file);
+    
+    if (success) {
+      // In a real implementation, we would refresh the catechism data here
+      // For now, we'll just show a message
+      toast.success("PDF processed successfully");
+    }
+    
+    // Reset the input so the same file can be selected again
+    if (fileInputRef.current) {
+      fileInputRef.current.value = '';
+    }
+  };
 
   const shareContent = (content: string, reference: string) => {
     if (navigator.share) {
@@ -87,7 +114,20 @@ const CatechismPage = () => {
 
   return (
     <div className="container py-6 space-y-6">
-      <h1 className="text-3xl font-bold tracking-tight">Catechism of the Catholic Church</h1>
+      <div className="flex justify-between items-center">
+        <h1 className="text-3xl font-bold tracking-tight">Catechism of the Catholic Church</h1>
+        <Button onClick={handleUploadClick} className="gap-2">
+          <Upload className="h-4 w-4" />
+          Upload Catechism PDF
+        </Button>
+        <input 
+          type="file" 
+          ref={fileInputRef} 
+          onChange={handleFileChange} 
+          accept=".pdf" 
+          className="hidden" 
+        />
+      </div>
       
       <div className="flex flex-col gap-4 sm:flex-row">
         <div className="flex-1 space-y-4">
@@ -132,7 +172,7 @@ const CatechismPage = () => {
 
             <CardContent className="flex-1 overflow-hidden p-0">
               <ScrollArea className="h-full pr-4">
-                <Tabs value={activeTab}>
+                <Tabs value={activeTab} className="w-full">
                   <TabsContent value="browse" className="mt-0 space-y-6">
                     {isLoading ? (
                       <div className="space-y-4 p-4">

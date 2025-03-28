@@ -3,7 +3,7 @@
 import { toast } from "sonner";
 
 // Define your API key and base URL here
-const API_KEY = "YOUR_API_KEY_HERE"; // Replace with your actual API key or load from environment
+const API_KEY = "YOUR_ACTUAL_API_KEY"; // Replace this with your actual API key
 const BASE_URL = "https://api.scripture.api.bible/v1"; // Example API URL, replace with your actual API
 
 export interface BibleVerse {
