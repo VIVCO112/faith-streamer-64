@@ -18,7 +18,7 @@ const CatechismPage = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [isSearching, setIsSearching] = useState(false);
   const [activeTab, setActiveTab] = useState("browse");
-  const { addBookmark } = useBookmarks();
+  const { addBookmark, hasBookmark } = useBookmarks();
 
   useEffect(() => {
     const loadCatechism = async () => {
@@ -55,12 +55,10 @@ const CatechismPage = () => {
 
   const handleBookmark = (paragraph: CatechismParagraph) => {
     addBookmark({
-      id: `catechism-${paragraph.number}`,
       type: "catechism",
       title: `Catechism ¶${paragraph.number}`,
       content: paragraph.text,
       reference: `CCC ¶${paragraph.number}`,
-      timestamp: new Date(),
     });
     
     toast.success("Catechism paragraph added to bookmarks");
@@ -134,105 +132,107 @@ const CatechismPage = () => {
 
             <CardContent className="flex-1 overflow-hidden p-0">
               <ScrollArea className="h-full pr-4">
-                <TabsContent value="browse" className="mt-0 space-y-6">
-                  {isLoading ? (
-                    <div className="space-y-4 p-4">
-                      {[1, 2, 3].map((i) => (
-                        <div key={i} className="space-y-2">
-                          <Skeleton className="h-5 w-40" />
-                          <Skeleton className="h-4 w-full" />
-                          <Skeleton className="h-4 w-full" />
-                        </div>
-                      ))}
-                    </div>
-                  ) : (
-                    <div className="space-y-6 p-4">
-                      {sections.map((section) => (
-                        <div key={section.id} className="space-y-4">
-                          <h3 className="font-semibold text-lg">{section.title}</h3>
-                          <div className="space-y-4">
-                            {section.paragraphs.map((paragraph) => (
-                              <div key={paragraph.number} className="space-y-2 pb-4 border-b">
-                                <div className="flex justify-between items-start">
-                                  <h4 className="font-medium flex items-center gap-1">
-                                    <span className="text-primary">¶{paragraph.number}</span>
-                                    {paragraph.title && <span className="font-normal text-sm text-muted-foreground ml-2">{paragraph.title}</span>}
-                                  </h4>
-                                  <div className="flex gap-1">
-                                    <Button 
-                                      variant="ghost" 
-                                      size="icon" 
-                                      className="h-7 w-7"
-                                      onClick={() => handleBookmark(paragraph)}
-                                    >
-                                      <BookOpen className="h-3.5 w-3.5" />
-                                    </Button>
-                                    <Button 
-                                      variant="ghost" 
-                                      size="icon" 
-                                      className="h-7 w-7"
-                                      onClick={() => shareContent(paragraph.text, `CCC ¶${paragraph.number}`)}
-                                    >
-                                      <Share2 className="h-3.5 w-3.5" />
-                                    </Button>
-                                  </div>
-                                </div>
-                                <p className="text-sm">{paragraph.text}</p>
-                              </div>
-                            ))}
-                          </div>
-                        </div>
-                      ))}
-                    </div>
-                  )}
-                </TabsContent>
-
-                <TabsContent value="search" className="mt-0">
-                  <div className="p-4 space-y-4">
-                    {isSearching ? (
-                      <div className="space-y-4">
+                <Tabs value={activeTab}>
+                  <TabsContent value="browse" className="mt-0 space-y-6">
+                    {isLoading ? (
+                      <div className="space-y-4 p-4">
                         {[1, 2, 3].map((i) => (
                           <div key={i} className="space-y-2">
                             <Skeleton className="h-5 w-40" />
                             <Skeleton className="h-4 w-full" />
-                          </div>
-                        ))}
-                      </div>
-                    ) : searchResults.length > 0 ? (
-                      <div className="space-y-6">
-                        <p className="text-sm text-muted-foreground">Found {searchResults.length} results for "{searchQuery}"</p>
-                        {searchResults.map((paragraph) => (
-                          <div key={paragraph.number} className="space-y-2 pb-4 border-b">
-                            <div className="flex justify-between items-start">
-                              <h4 className="font-medium text-primary">¶{paragraph.number}</h4>
-                              <div className="flex gap-1">
-                                <Button 
-                                  variant="ghost" 
-                                  size="icon" 
-                                  className="h-7 w-7"
-                                  onClick={() => handleBookmark(paragraph)}
-                                >
-                                  <BookOpen className="h-3.5 w-3.5" />
-                                </Button>
-                                <Button 
-                                  variant="ghost" 
-                                  size="icon" 
-                                  className="h-7 w-7"
-                                  onClick={() => shareContent(paragraph.text, `CCC ¶${paragraph.number}`)}
-                                >
-                                  <Share2 className="h-3.5 w-3.5" />
-                                </Button>
-                              </div>
-                            </div>
-                            <p className="text-sm">{paragraph.text}</p>
+                            <Skeleton className="h-4 w-full" />
                           </div>
                         ))}
                       </div>
                     ) : (
-                      searchQuery && <p className="text-center py-8 text-muted-foreground">No results found for "{searchQuery}"</p>
+                      <div className="space-y-6 p-4">
+                        {sections.map((section) => (
+                          <div key={section.id} className="space-y-4">
+                            <h3 className="font-semibold text-lg">{section.title}</h3>
+                            <div className="space-y-4">
+                              {section.paragraphs.map((paragraph) => (
+                                <div key={paragraph.number} className="space-y-2 pb-4 border-b">
+                                  <div className="flex justify-between items-start">
+                                    <h4 className="font-medium flex items-center gap-1">
+                                      <span className="text-primary">¶{paragraph.number}</span>
+                                      {paragraph.title && <span className="font-normal text-sm text-muted-foreground ml-2">{paragraph.title}</span>}
+                                    </h4>
+                                    <div className="flex gap-1">
+                                      <Button 
+                                        variant="ghost" 
+                                        size="icon" 
+                                        className="h-7 w-7"
+                                        onClick={() => handleBookmark(paragraph)}
+                                      >
+                                        <BookOpen className="h-3.5 w-3.5" />
+                                      </Button>
+                                      <Button 
+                                        variant="ghost" 
+                                        size="icon" 
+                                        className="h-7 w-7"
+                                        onClick={() => shareContent(paragraph.text, `CCC ¶${paragraph.number}`)}
+                                      >
+                                        <Share2 className="h-3.5 w-3.5" />
+                                      </Button>
+                                    </div>
+                                  </div>
+                                  <p className="text-sm">{paragraph.text}</p>
+                                </div>
+                              ))}
+                            </div>
+                          </div>
+                        ))}
+                      </div>
                     )}
-                  </div>
-                </TabsContent>
+                  </TabsContent>
+
+                  <TabsContent value="search" className="mt-0">
+                    <div className="p-4 space-y-4">
+                      {isSearching ? (
+                        <div className="space-y-4">
+                          {[1, 2, 3].map((i) => (
+                            <div key={i} className="space-y-2">
+                              <Skeleton className="h-5 w-40" />
+                              <Skeleton className="h-4 w-full" />
+                            </div>
+                          ))}
+                        </div>
+                      ) : searchResults.length > 0 ? (
+                        <div className="space-y-6">
+                          <p className="text-sm text-muted-foreground">Found {searchResults.length} results for "{searchQuery}"</p>
+                          {searchResults.map((paragraph) => (
+                            <div key={paragraph.number} className="space-y-2 pb-4 border-b">
+                              <div className="flex justify-between items-start">
+                                <h4 className="font-medium text-primary">¶{paragraph.number}</h4>
+                                <div className="flex gap-1">
+                                  <Button 
+                                    variant="ghost" 
+                                    size="icon" 
+                                    className="h-7 w-7"
+                                    onClick={() => handleBookmark(paragraph)}
+                                  >
+                                    <BookOpen className="h-3.5 w-3.5" />
+                                  </Button>
+                                  <Button 
+                                    variant="ghost" 
+                                    size="icon" 
+                                    className="h-7 w-7"
+                                    onClick={() => shareContent(paragraph.text, `CCC ¶${paragraph.number}`)}
+                                  >
+                                    <Share2 className="h-3.5 w-3.5" />
+                                  </Button>
+                                </div>
+                              </div>
+                              <p className="text-sm">{paragraph.text}</p>
+                            </div>
+                          ))}
+                        </div>
+                      ) : (
+                        searchQuery && <p className="text-center py-8 text-muted-foreground">No results found for "{searchQuery}"</p>
+                      )}
+                    </div>
+                  </TabsContent>
+                </Tabs>
               </ScrollArea>
             </CardContent>
           </Card>
