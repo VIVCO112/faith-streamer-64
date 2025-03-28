@@ -1,8 +1,11 @@
 
 import { useState, useEffect } from "react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Calendar } from "lucide-react";
+import { Bookmark, BookmarkCheck, Calendar } from "lucide-react";
 import { getDailyReadings } from "@/services/readings-service";
+import { Button } from "@/components/ui/button";
+import { useBookmarks } from "@/contexts/BookmarksContext";
+import { useToast } from "@/hooks/use-toast";
 
 interface Reading {
   title: string;
@@ -21,6 +24,8 @@ const DailyReadings = () => {
   const [readingsData, setReadingsData] = useState<DailyReadingsData | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const { addBookmark, hasBookmark, removeBookmark } = useBookmarks();
+  const { toast } = useToast();
 
   useEffect(() => {
     const fetchReadings = async () => {
@@ -39,6 +44,44 @@ const DailyReadings = () => {
 
     fetchReadings();
   }, []);
+
+  const handleBookmarkReading = (reading: Reading) => {
+    const readingReference = `reading-${reading.citation.replace(/\s+/g, '-').toLowerCase()}`;
+    const isBookmarked = hasBookmark(readingReference);
+    
+    if (isBookmarked) {
+      // Find the bookmark to remove
+      const bookmarkIds = document.querySelectorAll(`[data-reference="${readingReference}"]`);
+      if (bookmarkIds.length > 0) {
+        const id = bookmarkIds[0].getAttribute('data-id');
+        if (id) removeBookmark(id);
+      }
+      
+      toast({
+        title: "Reading Removed",
+        description: `${reading.title} has been removed from your bookmarks.`,
+      });
+    } else {
+      // Create content preview
+      let contentPreview = reading.text;
+      if (contentPreview.length > 100) {
+        contentPreview = contentPreview.substring(0, 97) + "...";
+      }
+      
+      addBookmark({
+        type: "reading",
+        title: reading.title,
+        subtitle: reading.citation,
+        reference: readingReference,
+        content: contentPreview
+      });
+      
+      toast({
+        title: "Reading Saved",
+        description: `${reading.title} has been saved to your bookmarks.`,
+      });
+    }
+  };
 
   return (
     <div className="space-y-6">
@@ -81,15 +124,33 @@ const DailyReadings = () => {
               <CardDescription>{readingsData.date}</CardDescription>
             </CardHeader>
             <CardContent className="space-y-6">
-              {readingsData.readings.map((reading, index) => (
-                <div key={index} className="space-y-2">
-                  <h3 className="font-semibold">{reading.title}</h3>
-                  <p className="text-sm text-muted-foreground">{reading.citation}</p>
-                  <div className="bible-text mt-2">
-                    {reading.text}
+              {readingsData.readings.map((reading, index) => {
+                const readingReference = `reading-${reading.citation.replace(/\s+/g, '-').toLowerCase()}`;
+                const isBookmarked = hasBookmark(readingReference);
+                
+                return (
+                  <div key={index} className="space-y-2" data-reference={readingReference}>
+                    <div className="flex justify-between items-center">
+                      <h3 className="font-semibold">{reading.title}</h3>
+                      <Button 
+                        variant="ghost" 
+                        size="sm" 
+                        onClick={() => handleBookmarkReading(reading)}
+                        className="h-8 px-2"
+                      >
+                        {isBookmarked ? 
+                          <BookmarkCheck className="h-4 w-4 text-primary" /> : 
+                          <Bookmark className="h-4 w-4" />
+                        }
+                      </Button>
+                    </div>
+                    <p className="text-sm text-muted-foreground">{reading.citation}</p>
+                    <div className="bible-text mt-2">
+                      {reading.text}
+                    </div>
                   </div>
-                </div>
-              ))}
+                );
+              })}
             </CardContent>
           </Card>
         </>

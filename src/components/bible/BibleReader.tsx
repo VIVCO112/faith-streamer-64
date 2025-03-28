@@ -1,10 +1,11 @@
 
 import { useEffect, useState } from "react";
-import { Bookmark, Share2, Headphones } from "lucide-react";
+import { Bookmark, BookmarkCheck, Share2, Headphones } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/hooks/use-toast";
 import { getVerseText } from "@/services/bible-service";
 import { cn } from "@/lib/utils";
+import { useBookmarks } from "@/contexts/BookmarksContext";
 
 interface BibleReaderProps {
   book: string;
@@ -22,6 +23,10 @@ const BibleReader = ({ book, chapter }: BibleReaderProps) => {
   const [error, setError] = useState<string | null>(null);
   const [fontSize, setFontSize] = useState<number>(18);
   const { toast } = useToast();
+  const { addBookmark, hasBookmark, removeBookmark } = useBookmarks();
+  
+  const bookmarkReference = `${book} ${chapter}`;
+  const isBookmarked = hasBookmark(bookmarkReference);
 
   useEffect(() => {
     const fetchChapterText = async () => {
@@ -42,11 +47,41 @@ const BibleReader = ({ book, chapter }: BibleReaderProps) => {
   }, [book, chapter]);
 
   const handleBookmark = () => {
-    // In a real app, we would save to user's bookmarks here
-    toast({
-      title: "Bookmark Added",
-      description: `${book} ${chapter} has been saved to your bookmarks.`
-    });
+    if (isBookmarked) {
+      // Find the bookmark to remove
+      const bookmarkIds = document.querySelectorAll(`[data-reference="${bookmarkReference}"]`);
+      if (bookmarkIds.length > 0) {
+        const id = bookmarkIds[0].getAttribute('data-id');
+        if (id) removeBookmark(id);
+      }
+      
+      toast({
+        title: "Bookmark Removed",
+        description: `${book} ${chapter} has been removed from your bookmarks.`
+      });
+    } else {
+      // Create content preview from first verses (limited to ~100 chars)
+      let contentPreview = "";
+      if (verses.length > 0) {
+        contentPreview = verses.slice(0, 2).map(v => v.text).join(" ");
+        if (contentPreview.length > 100) {
+          contentPreview = contentPreview.substring(0, 97) + "...";
+        }
+      }
+      
+      addBookmark({
+        type: "bible",
+        title: `${book} ${chapter}`,
+        subtitle: `Chapter ${chapter}`,
+        reference: bookmarkReference,
+        content: contentPreview
+      });
+      
+      toast({
+        title: "Bookmark Added",
+        description: `${book} ${chapter} has been saved to your bookmarks.`
+      });
+    }
   };
 
   const handleShare = async () => {
@@ -93,8 +128,17 @@ const BibleReader = ({ book, chapter }: BibleReaderProps) => {
             className="text-lg">
             A+
           </Button>
-          <Button variant="ghost" size="icon" onClick={handleBookmark}>
-            <Bookmark className="h-4 w-4" />
+          <Button 
+            variant="ghost" 
+            size="icon" 
+            onClick={handleBookmark}
+            data-reference={bookmarkReference}
+            title={isBookmarked ? "Remove bookmark" : "Add bookmark"}
+          >
+            {isBookmarked ? 
+              <BookmarkCheck className="h-4 w-4 text-primary" /> : 
+              <Bookmark className="h-4 w-4" />
+            }
           </Button>
           <Button variant="ghost" size="icon" onClick={handleShare}>
             <Share2 className="h-4 w-4" />
