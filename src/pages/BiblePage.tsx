@@ -1,7 +1,7 @@
 
 import { useParams } from "react-router-dom";
 import BibleNavigator from "@/components/bible/BibleNavigator";
-import BibleReader from "@/components/bible/BibleReader";
+import EnhancedBibleReader from "@/components/bible/EnhancedBibleReader";
 
 const BiblePage = () => {
   const { book = "Genesis", chapter = "1" } = useParams();
@@ -12,7 +12,7 @@ const BiblePage = () => {
         currentBook={book} 
         currentChapter={Number(chapter)} 
       />
-      <BibleReader 
+      <EnhancedBibleReader 
         book={book} 
         chapter={Number(chapter)} 
       />

@@ -12,6 +12,7 @@ import { Input } from "@/components/ui/input";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import PrayerCard from "@/components/prayers/PrayerCard";
+import PrayerRecommendations from "@/components/prayers/PrayerRecommendations";
 import { catholicPrayers } from "@/data/bible-data";
 import { Search } from "lucide-react";
 
@@ -30,6 +31,8 @@ const PrayersPage = () => {
 
   return (
     <div className="py-6 space-y-6">
+      <PrayerRecommendations />
+      
       <Card>
         <CardHeader>
           <CardTitle>Catholic Prayers</CardTitle>
