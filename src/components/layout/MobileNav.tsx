@@ -4,7 +4,7 @@ import {
   BookOpen, 
   Calendar, 
   Home, 
-  PrayingHands, 
+  HandHeart, 
   Bot,
   Menu
 } from "lucide-react";
@@ -67,7 +67,7 @@ const MobileNav = () => {
           active={location.pathname.startsWith("/readings")} 
         />
         <MobileNavItem 
-          icon={<PrayingHands size={20} />} 
+          icon={<HandHeart size={20} />} 
           label="Prayers" 
           to="/prayers" 
           active={location.pathname.startsWith("/prayers")} 

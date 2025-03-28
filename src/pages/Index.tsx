@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { popularVerses } from "@/data/bible-data";
-import { BookOpen, Bot, Calendar, PrayingHands, Quote } from "lucide-react";
+import { BookOpen, Bot, Calendar, HandHeart, Quote } from "lucide-react";
 
 const Index = () => {
   const getRandomVerse = () => {
@@ -76,7 +76,7 @@ const Index = () => {
         <Card>
           <CardHeader>
             <CardTitle className="flex items-center gap-2">
-              <PrayingHands className="h-5 w-5 text-primary" />
+              <HandHeart className="h-5 w-5 text-primary" />
               Catholic Prayers
             </CardTitle>
             <CardDescription>

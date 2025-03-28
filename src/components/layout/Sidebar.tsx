@@ -5,7 +5,7 @@ import {
   BookOpen, 
   Calendar, 
   Home, 
-  PrayingHands, 
+  HandHeart, 
   BookMarked, 
   Bot, 
   Settings,
@@ -83,7 +83,7 @@ const Sidebar = () => {
           active={location.pathname.startsWith("/readings")} 
         />
         <SidebarItem 
-          icon={<PrayingHands size={18} />} 
+          icon={<HandHeart size={18} />} 
           label="Prayers" 
           to="/prayers" 
           active={location.pathname.startsWith("/prayers")} 
