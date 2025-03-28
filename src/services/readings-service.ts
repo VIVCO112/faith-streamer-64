@@ -50,7 +50,7 @@ export const getDailyReadings = async (): Promise<DailyReadingsData> => {
           {
             title: "Gospel",
             citation: "Matthew 13:1-23",
-            text: "On that day, Jesus went out of the house and sat down by the sea. Such large crowds gathered around him that he got into a boat and sat down, and the whole crowd stood along the shore. And he spoke to them at length in parables, saying: "A sower went out to sow. And as he sowed, some seed fell on the path, and birds came and ate it up. Some fell on rocky ground, where it had little soil. It sprang up at once because the soil was not deep, and when the sun rose it was scorched, and it withered for lack of roots. Some seed fell among thorns, and the thorns grew up and choked it. But some seed fell on rich soil, and produced fruit, a hundred or sixty or thirtyfold. Whoever has ears ought to hear.""
+            text: "On that day, Jesus went out of the house and sat down by the sea. Such large crowds gathered around him that he got into a boat and sat down, and the whole crowd stood along the shore. And he spoke to them at length in parables, saying: A sower went out to sow. And as he sowed, some seed fell on the path, and birds came and ate it up. Some fell on rocky ground, where it had little soil. It sprang up at once because the soil was not deep, and when the sun rose it was scorched, and it withered for lack of roots. Some seed fell among thorns, and the thorns grew up and choked it. But some seed fell on rich soil, and produced fruit, a hundred or sixty or thirtyfold. Whoever has ears ought to hear."
           }
         ]
       });

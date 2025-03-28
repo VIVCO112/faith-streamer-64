@@ -82,7 +82,7 @@ export const popularVerses = [
   },
   { 
     citation: "Jeremiah 29:11", 
-    text: "For I know the plans I have for you," declares the LORD, "plans to prosper you and not to harm you, plans to give you hope and a future." 
+    text: "For I know the plans I have for you, declares the LORD, plans to prosper you and not to harm you, plans to give you hope and a future." 
   },
   { 
     citation: "Romans 8:28", 
