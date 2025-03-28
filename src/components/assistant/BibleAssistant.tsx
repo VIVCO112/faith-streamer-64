@@ -1,4 +1,3 @@
-
 import { useState, useEffect, useRef } from "react";
 import { Bot, Send, Mic, MicOff, Share2, Save, List, RefreshCcw } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -45,12 +44,10 @@ const BibleAssistant = () => {
   const { toast } = useToast();
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
-  // Scroll to bottom when messages change
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages]);
 
-  // Load conversations from localStorage on initial load
   useEffect(() => {
     const savedConversations = localStorage.getItem("bibleAssistantConversations");
     if (savedConversations) {
@@ -70,7 +67,6 @@ const BibleAssistant = () => {
     }
   }, []);
 
-  // Setup Speech Recognition when recording state changes
   useEffect(() => {
     if (isRecording) {
       startSpeechRecognition();
@@ -144,7 +140,6 @@ const BibleAssistant = () => {
       const utterance = new SpeechSynthesisUtterance(text);
       utterance.lang = 'en-US';
       
-      // Try to find a better voice
       const voices = window.speechSynthesis.getVoices();
       const preferredVoice = voices.find(voice => 
         voice.name.includes('Female') || 
@@ -187,18 +182,12 @@ const BibleAssistant = () => {
     setIsLoading(true);
 
     try {
-      // Use a local, lightweight model via direct API for demo purposes
-      // In a real app, this would connect to a running server with GPT4All, LLaMA, or similar
-      
-      // For now, simulate a response based on content and category
       let response = "";
       
-      // Use a simple keyword matching system for demo
       const lowercaseInput = input.toLowerCase();
       
       if (category === "bible_verses") {
         if (lowercaseInput.includes("verse") || lowercaseInput.includes("scripture")) {
-          // Find a relevant verse
           const verseIndex = Math.floor(Math.random() * popularVerses.length);
           response = `Here's a verse that might help: "${popularVerses[verseIndex].citation}": ${popularVerses[verseIndex].text}`;
         } else {
@@ -223,7 +212,6 @@ const BibleAssistant = () => {
           response = "Prayer is conversation with God that involves speaking and listening. The Catholic tradition offers many forms of prayer including vocal prayer, meditation, and contemplation. I can help guide you through specific prayers if you'd like.";
         }
       } else {
-        // General category - use a mix of responses
         const generalResponses = [
           "The Catholic Church teaches that the Bible is the inspired word of God, containing both the Old and New Testaments, including the deuterocanonical books which are sometimes called the Apocrypha by non-Catholics.",
           "The Blessed Virgin Mary is honored in the Catholic tradition as the Mother of God (Theotokos) and the first disciple of Jesus. The Church teaches several dogmas about Mary including her Immaculate Conception, Perpetual Virginity, and bodily Assumption into heaven.",
@@ -232,7 +220,6 @@ const BibleAssistant = () => {
           "Prayer is lifting the mind and heart to God. The Catholic tradition teaches various forms of prayer including vocal prayer, meditation, contemplative prayer, and liturgical prayer."
         ];
         
-        // Choose a response based on keywords or default to a random one
         if (lowercaseInput.includes("bible") || lowercaseInput.includes("scripture")) {
           response = generalResponses[0];
         } else if (lowercaseInput.includes("mary") || lowercaseInput.includes("virgin")) {
@@ -244,7 +231,6 @@ const BibleAssistant = () => {
         } else if (lowercaseInput.includes("pray") || lowercaseInput.includes("prayer")) {
           response = generalResponses[4];
         } else {
-          // Default to a random response if no keywords match
           response = generalResponses[Math.floor(Math.random() * generalResponses.length)];
         }
       }
@@ -300,6 +286,8 @@ const BibleAssistant = () => {
     const updatedConversations = [...conversations, newConversation];
     setConversations(updatedConversations);
     saveConversations(updatedConversations);
+    
+    startNewConversation();
     
     toast({
       title: "Conversation Saved",
