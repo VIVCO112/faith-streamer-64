@@ -1,7 +1,7 @@
 
 import React, { createContext, useContext, useState, useEffect } from "react";
 
-type BookmarkType = "bible" | "prayer" | "reading";
+type BookmarkType = "bible" | "prayer" | "reading" | "catechism";
 
 export interface Bookmark {
   id: string;
