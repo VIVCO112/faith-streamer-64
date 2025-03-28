@@ -6,15 +6,10 @@ import {
   Calendar, 
   Home, 
   HandHeart, 
-  BookMarked, 
   Bot, 
   Settings,
-  Sun,
-  Moon,
   Bookmark
 } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { useTheme } from "../core/ThemeProvider";
 
 interface SidebarItemProps {
   icon: React.ReactNode;
@@ -40,19 +35,6 @@ const SidebarItem = ({ icon, label, to, active }: SidebarItemProps) => {
 
 const Sidebar = () => {
   const location = useLocation();
-  const { theme, setTheme } = useTheme();
-
-  const themeIcon = {
-    light: <Sun size={18} />,
-    dark: <Moon size={18} />,
-    sepia: <BookOpen size={18} />
-  };
-
-  const nextTheme = {
-    light: "dark",
-    dark: "sepia",
-    sepia: "light"
-  };
 
   return (
     <aside className="w-64 border-r p-4 flex flex-col h-screen">
@@ -103,14 +85,6 @@ const Sidebar = () => {
       </nav>
       
       <div className="space-y-2 mt-auto">
-        <Button 
-          variant="ghost" 
-          className="w-full justify-start"
-          onClick={() => setTheme(nextTheme[theme] as "light" | "dark" | "sepia")}
-        >
-          {themeIcon[theme]}
-          <span className="ml-2 capitalize">{theme} Mode</span>
-        </Button>
         <SidebarItem 
           icon={<Settings size={18} />} 
           label="Settings" 
