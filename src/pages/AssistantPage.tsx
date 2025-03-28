@@ -2,34 +2,45 @@
 import BibleAssistant from "@/components/assistant/BibleAssistant";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
-import { Bot, Info } from "lucide-react";
+import { Bot, HelpCircle, Info } from "lucide-react";
 import { useIsMobile } from "@/hooks/use-mobile";
+import { Button } from "@/components/ui/button";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
 
 const AssistantPage = () => {
   const isMobile = useIsMobile();
 
   return (
-    <div className="py-6 container space-y-6">
+    <div className="py-6 container space-y-6 relative">
       <div className="flex items-center justify-between">
         <h1 className="text-3xl font-bold tracking-tight">Bible Assistant</h1>
-      </div>
-      
-      {!isMobile ? (
-        // Desktop layout - side by side
-        <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
-          <div className="lg:col-span-3">
-            <BibleAssistant />
-          </div>
-          
-          <div className="space-y-6">
-            <Card>
-              <CardHeader>
-                <CardTitle className="flex items-center gap-2">
-                  <Info className="h-5 w-5 text-primary" />
+        <Dialog>
+          <DialogTrigger asChild>
+            <Button variant="ghost" size="icon" className="rounded-full" aria-label="Help">
+              <HelpCircle className="h-5 w-5 text-primary" />
+            </Button>
+          </DialogTrigger>
+          <DialogContent className="sm:max-w-md">
+            <DialogHeader>
+              <DialogTitle>About the Bible Assistant</DialogTitle>
+              <DialogDescription>
+                Learn how the Bible Assistant can help you explore scripture and Catholic teachings.
+              </DialogDescription>
+            </DialogHeader>
+            
+            <div className="space-y-6 py-4">
+              <div>
+                <h3 className="font-medium mb-2 flex items-center gap-2">
+                  <Info className="h-4 w-4 text-primary" />
                   About the Assistant
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
+                </h3>
                 <p className="text-sm text-muted-foreground">
                   The Bible Assistant uses a lightweight, privacy-focused approach to help you
                   explore Catholic teachings and scripture. All processing happens in your
@@ -45,17 +56,13 @@ const AssistantPage = () => {
                     <li>Categorize your questions for better responses</li>
                   </ul>
                 </div>
-              </CardContent>
-            </Card>
-            
-            <Card>
-              <CardHeader>
-                <CardTitle className="flex items-center gap-2">
-                  <Bot className="h-5 w-5 text-primary" />
+              </div>
+              
+              <div>
+                <h3 className="font-medium mb-2 flex items-center gap-2">
+                  <Bot className="h-4 w-4 text-primary" />
                   Sample Questions
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
+                </h3>
                 <div className="text-sm space-y-3">
                   <div className="p-2 bg-muted rounded-md">
                     What does the Catholic Church teach about the Eucharist?
@@ -70,69 +77,15 @@ const AssistantPage = () => {
                     How does confession work in Catholicism?
                   </div>
                 </div>
-              </CardContent>
-            </Card>
-          </div>
-        </div>
-      ) : (
-        // Mobile layout - stacked with accordions
-        <div className="flex flex-col gap-6">
-          <div className="w-full">
-            <BibleAssistant />
-          </div>
-          
-          <Accordion type="single" collapsible className="w-full">
-            <AccordionItem value="about">
-              <AccordionTrigger className="flex gap-2 py-3">
-                <Info className="h-4 w-4 text-primary" />
-                <span>About the Assistant</span>
-              </AccordionTrigger>
-              <AccordionContent>
-                <div className="text-sm text-muted-foreground space-y-4 pt-2">
-                  <p>
-                    The Bible Assistant uses a lightweight, privacy-focused approach to help you
-                    explore Catholic teachings and scripture. All processing happens in your
-                    browser without sending data to external services.
-                  </p>
-                  <div className="space-y-2">
-                    <h4 className="font-medium">Features:</h4>
-                    <ul className="list-disc pl-5 space-y-1">
-                      <li>Ask questions about scripture and teachings</li>
-                      <li>Voice input and text-to-speech output</li>
-                      <li>Save and manage conversation history</li>
-                      <li>Share verses and insights</li>
-                      <li>Categorize your questions for better responses</li>
-                    </ul>
-                  </div>
-                </div>
-              </AccordionContent>
-            </AccordionItem>
-            
-            <AccordionItem value="sample-questions">
-              <AccordionTrigger className="flex gap-2 py-3">
-                <Bot className="h-4 w-4 text-primary" />
-                <span>Sample Questions</span>
-              </AccordionTrigger>
-              <AccordionContent>
-                <div className="text-sm space-y-3 pt-2">
-                  <div className="p-2 bg-muted rounded-md">
-                    What does the Catholic Church teach about the Eucharist?
-                  </div>
-                  <div className="p-2 bg-muted rounded-md">
-                    Can you explain the Rosary and how to pray it?
-                  </div>
-                  <div className="p-2 bg-muted rounded-md">
-                    What is the meaning of John 3:16?
-                  </div>
-                  <div className="p-2 bg-muted rounded-md">
-                    How does confession work in Catholicism?
-                  </div>
-                </div>
-              </AccordionContent>
-            </AccordionItem>
-          </Accordion>
-        </div>
-      )}
+              </div>
+            </div>
+          </DialogContent>
+        </Dialog>
+      </div>
+      
+      <div className="w-full">
+        <BibleAssistant />
+      </div>
     </div>
   );
 };
