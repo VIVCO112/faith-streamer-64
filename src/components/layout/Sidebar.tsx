@@ -8,7 +8,8 @@ import {
   HandHeart, 
   Bot, 
   Settings,
-  Bookmark
+  Bookmark,
+  BookOpenText
 } from "lucide-react";
 
 interface SidebarItemProps {
@@ -57,6 +58,12 @@ const Sidebar = () => {
           label="Bible" 
           to="/bible" 
           active={location.pathname.startsWith("/bible")} 
+        />
+        <SidebarItem 
+          icon={<BookOpenText size={18} />} 
+          label="Catechism" 
+          to="/catechism" 
+          active={location.pathname.startsWith("/catechism")} 
         />
         <SidebarItem 
           icon={<Calendar size={18} />} 
