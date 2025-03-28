@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { useTheme } from "@/components/core/ThemeProvider";
 import { Sun, Moon, BookOpen } from "lucide-react";
 import { toast } from "sonner";
+import { ApiKeyForm } from "@/components/settings/ApiKeyForm";
 
 const SettingsPage = () => {
   const { theme, setTheme } = useTheme();
@@ -17,6 +18,8 @@ const SettingsPage = () => {
   return (
     <div className="container py-6 space-y-6">
       <h1 className="text-3xl font-bold tracking-tight">Settings</h1>
+      
+      <ApiKeyForm />
       
       <Card>
         <CardHeader>
