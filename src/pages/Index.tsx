@@ -13,15 +13,16 @@ const Index = () => {
   const dailyVerse = getRandomVerse();
 
   return (
-    <div className="min-h-[calc(100vh-6rem)] py-6 space-y-6">
+    <div className="min-h-[calc(100vh-6rem)] py-6 space-y-8 animate-fade-in">
       <header className="text-center mb-8">
-        <h1 className="font-display text-4xl mb-2">Faith Streamer</h1>
+        <h1 className="font-display text-4xl md:text-5xl mb-3 text-primary">Faith Streamer</h1>
         <p className="text-lg text-muted-foreground">
           Your companion for Catholic scripture, prayer, and spiritual growth
         </p>
       </header>
 
-      <Card className="reading-card">
+      <Card className="reading-card hover-lift overflow-hidden">
+        <div className="h-1 bg-gradient-to-r from-primary to-accent"></div>
         <CardHeader>
           <CardTitle className="flex items-center gap-2">
             <Quote className="h-5 w-5 text-primary" />
@@ -39,7 +40,8 @@ const Index = () => {
       </Card>
 
       <div className="grid gap-6 sm:grid-cols-2">
-        <Card>
+        <Card className="staggered-item hover-lift overflow-hidden border-primary/10">
+          <div className="h-1 bg-gradient-to-r from-primary/60 to-primary/20"></div>
           <CardHeader>
             <CardTitle className="flex items-center gap-2">
               <BookOpen className="h-5 w-5 text-primary" />
@@ -56,10 +58,11 @@ const Index = () => {
           </CardContent>
         </Card>
 
-        <Card>
+        <Card className="staggered-item hover-lift overflow-hidden border-accent/10">
+          <div className="h-1 bg-gradient-to-r from-accent/60 to-accent/20"></div>
           <CardHeader>
             <CardTitle className="flex items-center gap-2">
-              <Calendar className="h-5 w-5 text-primary" />
+              <Calendar className="h-5 w-5 text-accent" />
               Daily Readings
             </CardTitle>
             <CardDescription>
@@ -73,10 +76,11 @@ const Index = () => {
           </CardContent>
         </Card>
 
-        <Card>
+        <Card className="staggered-item hover-lift overflow-hidden border-secondary/10">
+          <div className="h-1 bg-gradient-to-r from-secondary/60 to-secondary/20"></div>
           <CardHeader>
             <CardTitle className="flex items-center gap-2">
-              <HandHeart className="h-5 w-5 text-primary" />
+              <HandHeart className="h-5 w-5 text-secondary" />
               Catholic Prayers
             </CardTitle>
             <CardDescription>
@@ -90,7 +94,8 @@ const Index = () => {
           </CardContent>
         </Card>
 
-        <Card>
+        <Card className="staggered-item hover-lift overflow-hidden border-primary/10">
+          <div className="h-1 bg-gradient-to-r from-primary/80 to-accent/40"></div>
           <CardHeader>
             <CardTitle className="flex items-center gap-2">
               <Bot className="h-5 w-5 text-primary" />

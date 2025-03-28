@@ -16,7 +16,7 @@
     --popover: 0 0% 100%;
     --popover-foreground: 240 10% 3.9%;
 
-    --primary: 274 66% 30%;
+    --primary: 274 68% 28%;
     --primary-foreground: 355 100% 97%;
 
     --secondary: 40 76% 52%;
@@ -25,7 +25,7 @@
     --muted: 240 4.8% 95.9%;
     --muted-foreground: 240 3.8% 46.1%;
 
-    --accent: 136 47% 30%;
+    --accent: 136 50% 28%;
     --accent-foreground: 0 0% 98%;
 
     --destructive: 0 84.2% 60.2%;
@@ -48,16 +48,16 @@
     --popover: 240 10% 15%;
     --popover-foreground: 0 0% 95%;
 
-    --primary: 274 66% 30%;
+    --primary: 274 70% 35%;
     --primary-foreground: 355 100% 97%;
 
     --secondary: 40 76% 52%;
     --secondary-foreground: 240 5.9% 10%;
 
     --muted: 240 3.7% 25%;
-    --muted-foreground: 240 5% 64.9%;
+    --muted-foreground: 240 5% 70%;
 
-    --accent: 136 47% 30%;
+    --accent: 136 47% 35%;
     --accent-foreground: 0 0% 98%;
 
     --destructive: 0 62.8% 30.6%;
@@ -65,7 +65,7 @@
 
     --border: 240 3.7% 25%;
     --input: 240 3.7% 25%;
-    --ring: 274 66% 30%;
+    --ring: 274 66% 35%;
   }
 
   .sepia {
@@ -164,4 +164,54 @@
   .reading-card {
     @apply catholic-card bg-gradient-to-br from-card to-accent/10;
   }
+
+  /* Added page transition animations */
+  .page-transition-enter {
+    @apply opacity-0;
+  }
+  
+  .page-transition-enter-active {
+    @apply opacity-100 transition-opacity duration-300;
+  }
+  
+  .page-transition-exit {
+    @apply opacity-100;
+  }
+  
+  .page-transition-exit-active {
+    @apply opacity-0 transition-opacity duration-300;
+  }
+
+  /* Card hover effects */
+  .hover-lift {
+    @apply transition-all duration-300 hover:-translate-y-1 hover:shadow-md;
+  }
 }
+
+/* Added animations */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideUp {
+  from { transform: translateY(10px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.5s ease-out forwards;
+}
+
+.animate-slide-up {
+  animation: slideUp 0.4s ease-out forwards;
+}
+
+.staggered-item {
+  opacity: 0;
+}
+
+.staggered-item:nth-child(1) { animation: slideUp 0.4s ease-out 0.1s forwards; }
+.staggered-item:nth-child(2) { animation: slideUp 0.4s ease-out 0.2s forwards; }
+.staggered-item:nth-child(3) { animation: slideUp 0.4s ease-out 0.3s forwards; }
+.staggered-item:nth-child(4) { animation: slideUp 0.4s ease-out 0.4s forwards; }
