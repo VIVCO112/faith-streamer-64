@@ -2,8 +2,11 @@
 // A service to fetch from a real Bible API
 import { toast } from "sonner";
 
-// Define your API key and base URL here
-const API_KEY = "YOUR_ACTUAL_API_KEY"; // Replace this with your actual API key
+// Get API key from localStorage or use default
+const getApiKey = () => {
+  return localStorage.getItem('bible_api_key') || "YOUR_ACTUAL_API_KEY"; // Fallback to placeholder
+};
+
 const BASE_URL = "https://api.scripture.api.bible/v1"; // Example API URL, replace with your actual API
 
 export interface BibleVerse {
@@ -18,12 +21,29 @@ export interface BibleTranslation {
   language: string;
 }
 
+// Set API key in localStorage
+export const setBibleApiKey = (key: string): void => {
+  localStorage.setItem('bible_api_key', key);
+  toast.success("Bible API key has been saved");
+};
+
+// Get API key from localStorage
+export const getBibleApiKey = (): string => {
+  return getApiKey();
+};
+
+// Clear API key from localStorage
+export const clearBibleApiKey = (): void => {
+  localStorage.removeItem('bible_api_key');
+  toast.info("Bible API key has been removed");
+};
+
 // Get available Bible translations
 export const getBibleTranslations = async (): Promise<BibleTranslation[]> => {
   try {
     const response = await fetch(`${BASE_URL}/bibles`, {
       headers: {
-        "api-key": API_KEY
+        "api-key": getApiKey()
       }
     });
     
@@ -64,7 +84,7 @@ export const getBibleVerses = async (
     
     const response = await fetch(`${BASE_URL}/bibles/${bibleId}/chapters/${bookId}.${chapter}/verses`, {
       headers: {
-        "api-key": API_KEY
+        "api-key": getApiKey()
       }
     });
     
@@ -93,7 +113,7 @@ const getBookId = async (book: string, bibleId: string): Promise<string | null> 
   try {
     const response = await fetch(`${BASE_URL}/bibles/${bibleId}/books`, {
       headers: {
-        "api-key": API_KEY
+        "api-key": getApiKey()
       }
     });
     
@@ -122,7 +142,7 @@ export const searchBibleApi = async (
   try {
     const response = await fetch(`${BASE_URL}/bibles/${bibleId}/search?query=${encodeURIComponent(query)}`, {
       headers: {
-        "api-key": API_KEY
+        "api-key": getApiKey()
       }
     });
     

@@ -53,3 +53,30 @@ export const getParsedCatechism = (): CatechismSection[] | null => {
 export const setParsedCatechism = (data: CatechismSection[]): void => {
   parsedCatechism = data;
 };
+
+/**
+ * Create a component to upload and parse PDF files
+ */
+export const createFileUploader = (
+  onUploadStart?: () => void,
+  onUploadComplete?: (success: boolean) => void,
+): HTMLInputElement => {
+  const fileInput = document.createElement('input');
+  fileInput.type = 'file';
+  fileInput.accept = '.pdf';
+  fileInput.style.display = 'none';
+  
+  fileInput.onchange = async (event) => {
+    const target = event.target as HTMLInputElement;
+    const file = target.files?.[0];
+    
+    if (file) {
+      if (onUploadStart) onUploadStart();
+      const success = await uploadAndParseCatechismPDF(file);
+      if (onUploadComplete) onUploadComplete(success);
+    }
+  };
+  
+  document.body.appendChild(fileInput);
+  return fileInput;
+};
