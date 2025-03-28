@@ -75,7 +75,7 @@ const PrayerCard = ({ title, description, text, category }: PrayerCardProps) => 
   };
 
   return (
-    <Card className="prayer-card">
+    <Card className="prayer-card transition-all duration-300 hover:shadow-md hover:-translate-y-1 bg-gradient-to-br from-card to-secondary/10">
       {category && (
         <div className="px-4 pt-4">
           <span className="inline-block bg-primary/10 text-primary px-2 py-1 rounded text-xs">
@@ -84,7 +84,7 @@ const PrayerCard = ({ title, description, text, category }: PrayerCardProps) => 
         </div>
       )}
       <CardHeader>
-        <CardTitle>{title}</CardTitle>
+        <CardTitle className="text-primary/90">{title}</CardTitle>
         {description && <CardDescription>{description}</CardDescription>}
       </CardHeader>
       <CardContent>
@@ -99,6 +99,7 @@ const PrayerCard = ({ title, description, text, category }: PrayerCardProps) => 
           onClick={handleSave}
           data-reference={prayerReference}
           title={isBookmarked ? "Remove bookmark" : "Add bookmark"}
+          className="transition-colors duration-200"
         >
           {isBookmarked ? 
             <BookmarkCheck className="mr-2 h-4 w-4 text-primary" /> : 
@@ -106,7 +107,12 @@ const PrayerCard = ({ title, description, text, category }: PrayerCardProps) => 
           }
           {isBookmarked ? "Saved" : "Save"}
         </Button>
-        <Button size="sm" variant="outline" onClick={handleShare}>
+        <Button 
+          size="sm" 
+          variant="outline" 
+          onClick={handleShare}
+          className="transition-colors duration-200"
+        >
           <Share2 className="mr-2 h-4 w-4" />
           Share
         </Button>
