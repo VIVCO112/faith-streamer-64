@@ -1,6 +1,5 @@
-
 import { useState, useEffect, useRef } from "react";
-import { Bot, Send, Mic, MicOff, Share2, Save, List, RefreshCcw } from "lucide-react";
+import { Bot, Send, Mic, MicOff, Share2, Save, List, RefreshCcw, Trash2, X, AlertTriangle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
@@ -9,6 +8,17 @@ import { useToast } from "@/hooks/use-toast";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { popularVerses } from "@/data/bible-data";
+import { 
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "@/components/ui/alert-dialog";
 
 interface Message {
   id: string;
@@ -211,7 +221,7 @@ const BibleAssistant = () => {
         } else if (lowercaseInput.includes("novena")) {
           response = "A novena is a nine-day period of prayer for a specific intention. There are many different novenas dedicated to various saints, the Blessed Mother, and for different needs.";
         } else {
-          response = "Prayer is conversation with God that involves speaking and listening. The Catholic tradition offers many forms of prayer including vocal prayer, meditation, and contemplation. I can help guide you through specific prayers if you'd like.";
+          response = "Prayer is conversation with God that involves speaking and listening. The Catholic tradition offers many forms of prayer including vocal prayer, meditation, contemplation. I can help guide you through specific prayers if you'd like.";
         }
       } else {
         const generalResponses = [
@@ -263,6 +273,31 @@ const BibleAssistant = () => {
     setIsRecording(!isRecording);
   };
 
+  const clearCurrentChat = () => {
+    if (messages.length > 1) {
+      return; // The actual clear happens in the AlertDialog below
+    } else {
+      startNewConversation();
+    }
+  };
+
+  const deleteConversation = (id: string, e: React.MouseEvent) => {
+    e.stopPropagation(); // Prevent triggering the loadConversation
+    
+    const updatedConversations = conversations.filter(conv => conv.id !== id);
+    setConversations(updatedConversations);
+    saveConversations(updatedConversations);
+    
+    if (currentConversation === id) {
+      startNewConversation();
+    }
+    
+    toast({
+      title: "Conversation Deleted",
+      description: "The conversation has been removed from your history.",
+    });
+  };
+
   const saveConversation = () => {
     if (messages.length <= 1) {
       toast({
@@ -302,7 +337,6 @@ const BibleAssistant = () => {
     if (conversation) {
       setMessages(conversation.messages);
       setCurrentConversation(id);
-      // Automatically switch to chat tab when a conversation is loaded
       setActiveTab("chat");
     }
   };
@@ -382,9 +416,9 @@ const BibleAssistant = () => {
         </CardHeader>
 
         <TabsContent value="chat" className="flex-1 flex flex-col px-4 overflow-hidden">
-          <div className="mb-4">
+          <div className="flex mb-4 items-center justify-between">
             <Select value={category} onValueChange={setCategory}>
-              <SelectTrigger className="w-full">
+              <SelectTrigger className="w-[240px]">
                 <SelectValue placeholder="Select question category" />
               </SelectTrigger>
               <SelectContent>
@@ -394,6 +428,34 @@ const BibleAssistant = () => {
                 <SelectItem value="prayer_guidance">Prayer Guidance</SelectItem>
               </SelectContent>
             </Select>
+            
+            <AlertDialog>
+              <AlertDialogTrigger asChild>
+                <Button 
+                  variant="outline" 
+                  size="sm" 
+                  className="gap-1"
+                  disabled={messages.length <= 1}
+                >
+                  <X className="h-4 w-4" />
+                  Clear Chat
+                </Button>
+              </AlertDialogTrigger>
+              <AlertDialogContent>
+                <AlertDialogHeader>
+                  <AlertDialogTitle>Clear current conversation?</AlertDialogTitle>
+                  <AlertDialogDescription>
+                    This will remove all messages from the current chat. This action cannot be undone.
+                  </AlertDialogDescription>
+                </AlertDialogHeader>
+                <AlertDialogFooter>
+                  <AlertDialogCancel>Cancel</AlertDialogCancel>
+                  <AlertDialogAction onClick={startNewConversation}>
+                    Clear Chat
+                  </AlertDialogAction>
+                </AlertDialogFooter>
+              </AlertDialogContent>
+            </AlertDialog>
           </div>
 
           <CardContent className="flex-1 overflow-hidden p-0">
@@ -525,11 +587,39 @@ const BibleAssistant = () => {
                       }`}
                       onClick={() => loadConversation(conversation.id)}
                     >
-                      <CardHeader className="py-3">
-                        <CardTitle className="text-base">{conversation.title}</CardTitle>
-                        <CardDescription>
-                          {conversation.date.toLocaleDateString()} · {conversation.messages.length - 1} messages
-                        </CardDescription>
+                      <CardHeader className="py-3 flex flex-row items-start justify-between space-y-0">
+                        <div>
+                          <CardTitle className="text-base">{conversation.title}</CardTitle>
+                          <CardDescription>
+                            {new Date(conversation.date).toLocaleDateString()} · {conversation.messages.length - 1} messages
+                          </CardDescription>
+                        </div>
+                        <AlertDialog>
+                          <AlertDialogTrigger asChild>
+                            <Button 
+                              variant="ghost" 
+                              size="icon" 
+                              className="h-8 w-8 text-muted-foreground hover:text-destructive"
+                              onClick={(e) => e.stopPropagation()}
+                            >
+                              <Trash2 className="h-4 w-4" />
+                            </Button>
+                          </AlertDialogTrigger>
+                          <AlertDialogContent>
+                            <AlertDialogHeader>
+                              <AlertDialogTitle>Delete conversation?</AlertDialogTitle>
+                              <AlertDialogDescription>
+                                This will permanently remove this conversation from your history. This action cannot be undone.
+                              </AlertDialogDescription>
+                            </AlertDialogHeader>
+                            <AlertDialogFooter>
+                              <AlertDialogCancel>Cancel</AlertDialogCancel>
+                              <AlertDialogAction onClick={(e) => deleteConversation(conversation.id, e)}>
+                                Delete
+                              </AlertDialogAction>
+                            </AlertDialogFooter>
+                          </AlertDialogContent>
+                        </AlertDialog>
                       </CardHeader>
                     </Card>
                   ))
