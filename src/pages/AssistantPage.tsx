@@ -40,7 +40,7 @@ const AssistantPage = () => {
               <Button 
                 variant="outline" 
                 size="icon" 
-                className="absolute right-4 top-4 rounded-full z-50" 
+                className="absolute right-4 top-4 rounded-full z-[100] bg-background border-2 shadow-sm" 
                 aria-label="Close"
               >
                 <X className="h-5 w-5" />
