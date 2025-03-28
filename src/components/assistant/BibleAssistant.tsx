@@ -1,3 +1,4 @@
+
 import { useState, useEffect, useRef } from "react";
 import { Bot, Send, Mic, MicOff, Share2, Save, List, RefreshCcw } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -39,6 +40,7 @@ const BibleAssistant = () => {
   const [currentConversation, setCurrentConversation] = useState<string>("current");
   const [category, setCategory] = useState<string>("general");
   const [isSpeaking, setIsSpeaking] = useState(false);
+  const [activeTab, setActiveTab] = useState("chat");
   const microphoneRef = useRef<SpeechRecognition | null>(null);
   const synthesisRef = useRef<SpeechSynthesisUtterance | null>(null);
   const { toast } = useToast();
@@ -300,6 +302,8 @@ const BibleAssistant = () => {
     if (conversation) {
       setMessages(conversation.messages);
       setCurrentConversation(id);
+      // Automatically switch to chat tab when a conversation is loaded
+      setActiveTab("chat");
     }
   };
 
@@ -359,7 +363,7 @@ const BibleAssistant = () => {
   };
 
   return (
-    <Tabs defaultValue="chat" className="h-[calc(100vh-120px)] flex flex-col">
+    <Tabs value={activeTab} onValueChange={setActiveTab} className="h-[calc(100vh-120px)] flex flex-col">
       <Card className="flex-1 flex flex-col">
         <CardHeader className="pb-2">
           <div className="flex justify-between items-center">
