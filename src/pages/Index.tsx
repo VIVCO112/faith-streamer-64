@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { popularVerses } from "@/data/bible-data";
-import { BookOpen, Calendar, HandHeart, Quote } from "lucide-react";
+import { BookOpen, Calendar, HandHeart, Quote, Bookmark } from "lucide-react";
 import DailyDevotional from "@/components/devotional/DailyDevotional";
 
 const Index = () => {
