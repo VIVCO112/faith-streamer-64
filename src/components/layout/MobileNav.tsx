@@ -5,7 +5,6 @@ import {
   Calendar, 
   Home, 
   HandHeart, 
-  Bot,
   Menu,
   Bookmark,
   Settings,
@@ -107,15 +106,7 @@ const MobileNav = () => {
                 </Button>
               </SheetClose>
             </div>
-            <div className="grid grid-cols-3 gap-4 pt-2">
-              <Link 
-                to="/assistant" 
-                onClick={() => setOpen(false)}
-                className="flex flex-col items-center justify-center p-4 rounded-lg border hover-lift"
-              >
-                <Bot size={24} className="mb-1 text-primary" />
-                <span className="text-sm">Assistant</span>
-              </Link>
+            <div className="grid grid-cols-2 gap-4 pt-2">
               <Link 
                 to="/bookmarks" 
                 onClick={() => setOpen(false)}

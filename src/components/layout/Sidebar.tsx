@@ -6,10 +6,8 @@ import {
   Calendar, 
   Home, 
   HandHeart, 
-  Bot, 
   Settings,
   Bookmark,
-  BookOpenText
 } from "lucide-react";
 
 interface SidebarItemProps {
@@ -60,12 +58,6 @@ const Sidebar = () => {
           active={location.pathname.startsWith("/bible")} 
         />
         <SidebarItem 
-          icon={<BookOpenText size={18} />} 
-          label="Catechism" 
-          to="/catechism" 
-          active={location.pathname.startsWith("/catechism")} 
-        />
-        <SidebarItem 
           icon={<Calendar size={18} />} 
           label="Daily Readings" 
           to="/readings" 
@@ -76,12 +68,6 @@ const Sidebar = () => {
           label="Prayers" 
           to="/prayers" 
           active={location.pathname.startsWith("/prayers")} 
-        />
-        <SidebarItem 
-          icon={<Bot size={18} />} 
-          label="Bible Assistant" 
-          to="/assistant" 
-          active={location.pathname.startsWith("/assistant")} 
         />
         <SidebarItem 
           icon={<Bookmark size={18} />} 

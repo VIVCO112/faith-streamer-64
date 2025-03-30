@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { popularVerses } from "@/data/bible-data";
-import { BookOpen, Bot, Calendar, HandHeart, Quote } from "lucide-react";
+import { BookOpen, Calendar, HandHeart, Quote } from "lucide-react";
 import DailyDevotional from "@/components/devotional/DailyDevotional";
 
 const Index = () => {
@@ -106,16 +106,16 @@ const Index = () => {
           <div className="h-1 bg-gradient-to-r from-primary/80 to-accent/40"></div>
           <CardHeader>
             <CardTitle className="flex items-center gap-2">
-              <Bot className="h-5 w-5 text-primary" />
-              Bible Assistant
+              <Bookmark className="h-5 w-5 text-primary" />
+              Bookmarks
             </CardTitle>
             <CardDescription>
-              Get help understanding scripture and Catholic teachings
+              Access your saved verses, prayers and readings
             </CardDescription>
           </CardHeader>
           <CardContent>
-            <Link to="/assistant">
-              <Button className="w-full">Ask Assistant</Button>
+            <Link to="/bookmarks">
+              <Button className="w-full">View Bookmarks</Button>
             </Link>
           </CardContent>
         </Card>
