@@ -18,7 +18,7 @@ const Index = () => {
       <header className="text-center mb-8">
         <h1 className="font-display text-4xl md:text-5xl mb-3 text-primary">Faith Streamer</h1>
         <p className="text-lg text-muted-foreground">
-          Your companion for Catholic scripture, prayer, and spiritual growth
+          Your companion for scripture, prayer, and spiritual growth
         </p>
       </header>
 
@@ -56,7 +56,7 @@ const Index = () => {
               Read the Bible
             </CardTitle>
             <CardDescription>
-              Access the complete Catholic Bible with commentary and study tools
+              Access the complete Bible with commentary and study tools
             </CardDescription>
           </CardHeader>
           <CardContent>
@@ -74,7 +74,7 @@ const Index = () => {
               Daily Readings
             </CardTitle>
             <CardDescription>
-              View today's Mass readings and reflections
+              View today's readings and reflections
             </CardDescription>
           </CardHeader>
           <CardContent>
@@ -89,7 +89,7 @@ const Index = () => {
           <CardHeader>
             <CardTitle className="flex items-center gap-2">
               <HandHeart className="h-5 w-5 text-secondary" />
-              Catholic Prayers
+              Prayers
             </CardTitle>
             <CardDescription>
               Traditional prayers, devotions, and spiritual resources

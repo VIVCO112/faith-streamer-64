@@ -16,7 +16,7 @@ import PrayerRecommendations from "@/components/prayers/PrayerRecommendations";
 import { catholicPrayers } from "@/data/bible-data";
 import { Search } from "lucide-react";
 
-const categories = ["All", "Essential", "Marian", "Saints", "Creeds"];
+const categories = ["All", "Essential"];
 
 const PrayersPage = () => {
   const [selectedCategory, setSelectedCategory] = useState("All");
@@ -35,9 +35,9 @@ const PrayersPage = () => {
       
       <Card>
         <CardHeader>
-          <CardTitle>Catholic Prayers</CardTitle>
+          <CardTitle>Prayers</CardTitle>
           <CardDescription>
-            Traditional and devotional prayers from the Catholic tradition
+            Traditional and devotional prayers
           </CardDescription>
         </CardHeader>
         <CardContent>

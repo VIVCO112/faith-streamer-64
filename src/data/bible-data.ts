@@ -100,33 +100,24 @@ export const popularVerses = [
 
 export const catholicPrayers = [
   {
-    title: "Hail Mary",
-    category: "Marian",
-    text: "Hail Mary, full of grace. The Lord is with thee.\nBlessed art thou amongst women, and blessed is the fruit of thy womb, Jesus.\nHoly Mary, Mother of God, pray for us sinners, now and at the hour of our death. Amen."
-  },
-  {
-    title: "Our Father",
+    title: "The Lord's Prayer",
     category: "Essential",
     text: "Our Father, who art in heaven, hallowed be thy name; thy kingdom come; thy will be done on earth as it is in heaven. Give us this day our daily bread; and forgive us our trespasses as we forgive those who trespass against us; and lead us not into temptation, but deliver us from evil. Amen."
   },
   {
-    title: "Glory Be",
+    title: "Prayer of Thanksgiving",
     category: "Essential",
-    text: "Glory be to the Father, and to the Son, and to the Holy Spirit. As it was in the beginning, is now, and ever shall be, world without end. Amen."
+    text: "Gracious God, we thank you for the blessings you have given us. Help us to live with grateful hearts and to share your love with others. Guide us in your ways and strengthen us to serve you faithfully. Amen."
   },
   {
-    title: "Apostles' Creed",
-    category: "Creeds",
-    text: "I believe in God, the Father almighty, Creator of heaven and earth, and in Jesus Christ, his only Son, our Lord, who was conceived by the Holy Spirit, born of the Virgin Mary, suffered under Pontius Pilate, was crucified, died and was buried; he descended into hell; on the third day he rose again from the dead; he ascended into heaven, and is seated at the right hand of God the Father almighty; from there he will come to judge the living and the dead. I believe in the Holy Spirit, the holy catholic Church, the communion of saints, the forgiveness of sins, the resurrection of the body, and life everlasting. Amen."
+    title: "Prayer for Guidance",
+    category: "Essential",
+    text: "Lord, guide my steps today. Help me to walk in your light and truth. Give me wisdom to make good decisions and courage to follow the path you set before me. May your presence be with me in all I do. Amen."
   },
   {
-    title: "Memorare",
-    category: "Marian",
-    text: "Remember, O most gracious Virgin Mary, that never was it known that anyone who fled to thy protection, implored thy help, or sought thy intercession was left unaided. Inspired by this confidence, I fly unto thee, O Virgin of virgins, my mother; to thee do I come, before thee I stand, sinful and sorrowful. O Mother of the Word Incarnate, despise not my petitions, but in thy mercy hear and answer me. Amen."
-  },
-  {
-    title: "Prayer to St. Michael",
-    category: "Saints",
-    text: "St. Michael the Archangel, defend us in battle. Be our defense against the wickedness and snares of the Devil. May God rebuke him, we humbly pray, and do thou, O Prince of the heavenly hosts, by the power of God, thrust into hell Satan, and all the evil spirits, who prowl about the world seeking the ruin of souls. Amen."
+    title: "Prayer for Strength",
+    category: "Essential",
+    text: "Almighty God, source of all strength, I come before you seeking your power and courage. When I am weak, be my strength; when I am afraid, be my courage; when I am tired, be my rest. Help me to trust in your unfailing love and to find my strength in you. Amen."
   }
 ];
+
