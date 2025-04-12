@@ -1,7 +1,7 @@
 
 import { createContext, useContext, useEffect, useState } from "react";
 
-type Theme = "light" | "dark" | "sepia";
+type Theme = "light" | "dark" | "sepia" | "rustic" | "monochrome";
 
 interface ThemeProviderProps {
   children: React.ReactNode;
@@ -31,7 +31,7 @@ export function ThemeProvider({
   useEffect(() => {
     const root = window.document.documentElement;
     
-    root.classList.remove("light", "dark", "sepia");
+    root.classList.remove("light", "dark", "sepia", "rustic", "monochrome");
     root.classList.add(theme);
     localStorage.setItem("theme", theme);
   }, [theme]);

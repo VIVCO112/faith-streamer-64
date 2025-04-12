@@ -96,6 +96,66 @@
     --input: 41 30% 80%;
     --ring: 41 55% 40%;
   }
+
+  .rustic {
+    --background: 30 25% 94%;
+    --foreground: 20 30% 20%;
+
+    --card: 28 20% 95%;
+    --card-foreground: 20 30% 20%;
+
+    --popover: 28 20% 95%;
+    --popover-foreground: 20 30% 20%;
+
+    --primary: 24 75% 35%;
+    --primary-foreground: 30 30% 98%;
+
+    --secondary: 15 70% 50%;
+    --secondary-foreground: 30 30% 98%;
+
+    --muted: 25 30% 88%;
+    --muted-foreground: 20 20% 40%;
+
+    --accent: 5 65% 40%;
+    --accent-foreground: 30 30% 98%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 30 30% 98%;
+
+    --border: 25 30% 80%;
+    --input: 25 30% 80%;
+    --ring: 24 75% 35%;
+  }
+
+  .monochrome {
+    --background: 220 10% 96%;
+    --foreground: 220 20% 15%;
+
+    --card: 220 10% 98%;
+    --card-foreground: 220 20% 15%;
+
+    --popover: 220 10% 98%;
+    --popover-foreground: 220 20% 15%;
+
+    --primary: 220 40% 40%;
+    --primary-foreground: 220 10% 98%;
+
+    --secondary: 220 20% 80%;
+    --secondary-foreground: 220 20% 15%;
+
+    --muted: 220 15% 90%;
+    --muted-foreground: 220 10% 40%;
+
+    --accent: 220 40% 40%;
+    --accent-foreground: 220 10% 98%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 220 10% 98%;
+
+    --border: 220 15% 80%;
+    --input: 220 15% 80%;
+    --ring: 220 40% 40%;
+  }
 }
 
 @layer base {

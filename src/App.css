@@ -33,3 +33,47 @@
 .sepia .card {
   background-color: #fffdf8;
 }
+
+/* Rustic theme specific styles */
+.rustic button.bg-\[\#9B4E20\] {
+  color: #faf4ee;
+}
+
+.rustic .bg-primary {
+  background-color: #9B4E20;
+}
+
+.rustic input {
+  background-color: rgba(250, 245, 240, 0.8);
+}
+
+.rustic {
+  background-color: #faf4ee;
+  color: #4a3520;
+}
+
+.rustic .card {
+  background-color: #fcf9f5;
+}
+
+/* Monochrome theme specific styles */
+.monochrome button.bg-\[\#4B5975\] {
+  color: #f8f9fc;
+}
+
+.monochrome .bg-primary {
+  background-color: #4B5975;
+}
+
+.monochrome input {
+  background-color: rgba(245, 247, 252, 0.8);
+}
+
+.monochrome {
+  background-color: #f8f9fc;
+  color: #2d3748;
+}
+
+.monochrome .card {
+  background-color: #fafbfd;
+}

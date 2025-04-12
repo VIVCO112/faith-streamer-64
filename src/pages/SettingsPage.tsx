@@ -3,14 +3,14 @@ import React from "react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { useTheme } from "@/components/core/ThemeProvider";
-import { Sun, Moon, BookOpen, Info } from "lucide-react";
+import { Sun, Moon, BookOpen, Palette, PanelLeft, Info } from "lucide-react";
 import { toast } from "sonner";
 import { ApiKeyForm } from "@/components/settings/ApiKeyForm";
 
 const SettingsPage = () => {
   const { theme, setTheme } = useTheme();
 
-  const handleThemeChange = (newTheme: "light" | "dark" | "sepia") => {
+  const handleThemeChange = (newTheme: "light" | "dark" | "sepia" | "rustic" | "monochrome") => {
     setTheme(newTheme);
     toast.success(`Theme changed to ${newTheme} mode`);
   };
@@ -28,7 +28,7 @@ const SettingsPage = () => {
           <CardDescription>Customize how the app looks and feels</CardDescription>
         </CardHeader>
         <CardContent>
-          <div className="space-y-2">
+          <div className="space-y-4">
             <h3 className="text-sm font-medium">Theme</h3>
             <div className="flex flex-wrap gap-2">
               <Button 
@@ -54,6 +54,22 @@ const SettingsPage = () => {
               >
                 <BookOpen size={16} />
                 Sepia
+              </Button>
+              <Button 
+                variant={theme === "rustic" ? "default" : "outline"}
+                className="flex items-center gap-2 transition-all duration-300 bg-[#9B4E20]"
+                onClick={() => handleThemeChange("rustic")}
+              >
+                <Palette size={16} />
+                Rustic
+              </Button>
+              <Button 
+                variant={theme === "monochrome" ? "default" : "outline"}
+                className="flex items-center gap-2 transition-all duration-300 bg-[#4B5975]"
+                onClick={() => handleThemeChange("monochrome")}
+              >
+                <PanelLeft size={16} />
+                Monochrome
               </Button>
             </div>
           </div>
