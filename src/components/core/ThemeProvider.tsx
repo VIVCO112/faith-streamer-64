@@ -38,7 +38,15 @@ export function ThemeProvider({
 
   const value = {
     theme,
-    setTheme: (theme: Theme) => setTheme(theme),
+    setTheme: (theme: Theme) => {
+      setTheme(theme);
+      // Force a rerender by toggling a class
+      const root = window.document.documentElement;
+      root.classList.add('theme-transition');
+      setTimeout(() => {
+        root.classList.remove('theme-transition');
+      }, 100);
+    },
   };
 
   return (

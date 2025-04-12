@@ -49,7 +49,7 @@ const SettingsPage = () => {
               </Button>
               <Button 
                 variant={theme === "sepia" ? "default" : "outline"}
-                className="flex items-center gap-2 transition-all duration-300"
+                className="flex items-center gap-2 transition-all duration-300 bg-[#BBA877]"
                 onClick={() => handleThemeChange("sepia")}
               >
                 <BookOpen size={16} />

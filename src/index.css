@@ -68,33 +68,33 @@
   }
 
   .sepia {
-    --background: 40 35% 96%;
-    --foreground: 35 25% 20%;
+    --background: 49 70% 96%;
+    --foreground: 45 30% 25%;
 
-    --card: 38 30% 96%;
-    --card-foreground: 35 25% 20%;
+    --card: 48 55% 97%;
+    --card-foreground: 45 30% 25%;
 
-    --popover: 38 30% 96%;
-    --popover-foreground: 35 25% 20%;
+    --popover: 48 55% 97%;
+    --popover-foreground: 45 30% 25%;
 
-    --primary: 36 75% 40%;
-    --primary-foreground: 355 100% 97%;
+    --primary: 41 55% 40%;
+    --primary-foreground: 48 100% 98%;
 
-    --secondary: 32 60% 80%;
-    --secondary-foreground: 35 25% 20%;
+    --secondary: 41 70% 80%;
+    --secondary-foreground: 45 30% 25%;
 
-    --muted: 32 25% 88%;
-    --muted-foreground: 35 25% 40%;
+    --muted: 41 40% 90%;
+    --muted-foreground: 45 20% 40%;
 
-    --accent: 34 50% 45%;
-    --accent-foreground: 0 0% 98%;
+    --accent: 35 80% 40%;
+    --accent-foreground: 48 100% 98%;
 
     --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 0 0% 98%;
+    --destructive-foreground: 48 100% 98%;
 
-    --border: 35 30% 80%;
-    --input: 35 30% 80%;
-    --ring: 36 75% 40%;
+    --border: 41 30% 80%;
+    --input: 41 30% 80%;
+    --ring: 41 55% 40%;
   }
 }
 
