@@ -68,33 +68,33 @@
   }
 
   .sepia {
-    --background: 30 30% 93%;
-    --foreground: 40 36% 12%;
+    --background: 40 35% 96%;
+    --foreground: 35 25% 20%;
 
-    --card: 30 25% 96%;
-    --card-foreground: 40 36% 12%;
+    --card: 38 30% 96%;
+    --card-foreground: 35 25% 20%;
 
-    --popover: 30 25% 96%;
-    --popover-foreground: 40 36% 12%;
+    --popover: 38 30% 96%;
+    --popover-foreground: 35 25% 20%;
 
-    --primary: 274 66% 30%;
+    --primary: 36 75% 40%;
     --primary-foreground: 355 100% 97%;
 
-    --secondary: 30 40% 80%;
-    --secondary-foreground: 40 20% 10%;
+    --secondary: 32 60% 80%;
+    --secondary-foreground: 35 25% 20%;
 
-    --muted: 30 20% 88%;
-    --muted-foreground: 40 20% 40%;
+    --muted: 32 25% 88%;
+    --muted-foreground: 35 25% 40%;
 
-    --accent: 136 47% 30%;
+    --accent: 34 50% 45%;
     --accent-foreground: 0 0% 98%;
 
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 0 0% 98%;
 
-    --border: 30 30% 85%;
-    --input: 30 30% 85%;
-    --ring: 40 76% 50%;
+    --border: 35 30% 80%;
+    --input: 35 30% 80%;
+    --ring: 36 75% 40%;
   }
 }
 
@@ -155,8 +155,6 @@
   .catholic-card {
     @apply rounded-md border bg-card p-4 shadow-sm transition-all hover:shadow-md;
   }
-
-  /* Remove the prayer-card class since we're now styling it directly in the component */
   
   .reading-card {
     @apply catholic-card bg-gradient-to-br from-card to-accent/10;

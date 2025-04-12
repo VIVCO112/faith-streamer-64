@@ -33,7 +33,8 @@ const PrayersPage = () => {
     <div className="py-6 space-y-6">
       <PrayerRecommendations />
       
-      <Card>
+      <Card className="overflow-hidden">
+        <div className="h-1 bg-gradient-to-r from-accent/60 to-accent/20"></div>
         <CardHeader>
           <CardTitle>Prayers</CardTitle>
           <CardDescription>
@@ -54,7 +55,7 @@ const PrayersPage = () => {
       </Card>
 
       <Tabs defaultValue="All" value={selectedCategory} onValueChange={setSelectedCategory}>
-        <TabsList className="w-full justify-start">
+        <TabsList className="w-full justify-start bg-muted/50">
           {categories.map((category) => (
             <TabsTrigger key={category} value={category}>
               {category}
