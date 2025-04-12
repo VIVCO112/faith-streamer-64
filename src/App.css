@@ -11,29 +11,6 @@
   transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-/* Sepia theme specific styles */
-.sepia button.bg-\[\#BBA877\] {
-  color: #fffdf5;
-}
-
-.sepia .bg-primary {
-  background-color: #BBA877;
-}
-
-.sepia input {
-  background-color: rgba(255, 250, 227, 0.8);
-}
-
-/* Override any remaining conflicting styles */
-.sepia {
-  background-color: #fffdf5;
-  color: #5c4b2a;
-}
-
-.sepia .card {
-  background-color: #fffdf8;
-}
-
 /* Rustic theme specific styles */
 .rustic button.bg-\[\#9B4E20\] {
   color: #faf4ee;

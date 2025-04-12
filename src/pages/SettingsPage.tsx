@@ -3,14 +3,14 @@ import React from "react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { useTheme } from "@/components/core/ThemeProvider";
-import { Sun, Moon, BookOpen, Palette, PanelLeft, Info } from "lucide-react";
+import { Sun, Moon, Palette, PanelLeft, Info } from "lucide-react";
 import { toast } from "sonner";
 import { ApiKeyForm } from "@/components/settings/ApiKeyForm";
 
 const SettingsPage = () => {
   const { theme, setTheme } = useTheme();
 
-  const handleThemeChange = (newTheme: "light" | "dark" | "sepia" | "rustic" | "monochrome") => {
+  const handleThemeChange = (newTheme: "light" | "dark" | "rustic" | "monochrome") => {
     setTheme(newTheme);
     toast.success(`Theme changed to ${newTheme} mode`);
   };
@@ -46,14 +46,6 @@ const SettingsPage = () => {
               >
                 <Moon size={16} />
                 Dark
-              </Button>
-              <Button 
-                variant={theme === "sepia" ? "default" : "outline"}
-                className="flex items-center gap-2 transition-all duration-300 bg-[#BBA877]"
-                onClick={() => handleThemeChange("sepia")}
-              >
-                <BookOpen size={16} />
-                Sepia
               </Button>
               <Button 
                 variant={theme === "rustic" ? "default" : "outline"}

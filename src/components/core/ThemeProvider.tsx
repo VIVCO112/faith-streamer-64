@@ -1,7 +1,7 @@
 
 import { createContext, useContext, useEffect, useState } from "react";
 
-type Theme = "light" | "dark" | "sepia" | "rustic" | "monochrome";
+type Theme = "light" | "dark" | "rustic" | "monochrome";
 
 interface ThemeProviderProps {
   children: React.ReactNode;
@@ -25,13 +25,20 @@ export function ThemeProvider({
   defaultTheme = "light",
 }: ThemeProviderProps) {
   const [theme, setTheme] = useState<Theme>(
-    () => (localStorage.getItem("theme") as Theme) || defaultTheme
+    () => {
+      const savedTheme = localStorage.getItem("theme") as Theme;
+      // If the saved theme is 'sepia', default to 'light' instead
+      if (savedTheme === 'sepia') {
+        return defaultTheme;
+      }
+      return savedTheme || defaultTheme;
+    }
   );
 
   useEffect(() => {
     const root = window.document.documentElement;
     
-    root.classList.remove("light", "dark", "sepia", "rustic", "monochrome");
+    root.classList.remove("light", "dark", "rustic", "monochrome", "sepia");
     root.classList.add(theme);
     localStorage.setItem("theme", theme);
   }, [theme]);
