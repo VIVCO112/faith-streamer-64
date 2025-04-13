@@ -26,12 +26,12 @@ export function ThemeProvider({
 }: ThemeProviderProps) {
   const [theme, setTheme] = useState<Theme>(
     () => {
-      const savedTheme = localStorage.getItem("theme") as Theme;
+      const savedTheme = localStorage.getItem("theme");
       // If the saved theme is 'sepia', default to 'light' instead
       if (savedTheme === 'sepia') {
         return defaultTheme;
       }
-      return savedTheme || defaultTheme;
+      return (savedTheme as Theme) || defaultTheme;
     }
   );
 
