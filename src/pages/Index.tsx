@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { popularVerses } from "@/data/bible-data";
-import { BookOpen, Calendar, HandHeart, Quote, Bookmark } from "lucide-react";
+import { Quote } from "lucide-react";
 import DailyDevotional from "@/components/devotional/DailyDevotional";
 
 const Index = () => {
@@ -45,44 +45,6 @@ const Index = () => {
         <div className="order-1 sm:order-2">
           <DailyDevotional />
         </div>
-      </div>
-
-      <div className="grid gap-6 sm:grid-cols-2">
-        <Card className="staggered-item hover-lift overflow-hidden border-secondary/10">
-          <div className="h-1 bg-gradient-to-r from-secondary/60 to-secondary/20"></div>
-          <CardHeader>
-            <CardTitle className="flex items-center gap-2">
-              <HandHeart className="h-5 w-5 text-secondary" />
-              Prayers
-            </CardTitle>
-            <CardDescription>
-              Traditional prayers, devotions, and spiritual resources
-            </CardDescription>
-          </CardHeader>
-          <CardContent>
-            <Link to="/prayers">
-              <Button className="w-full">Browse Prayers</Button>
-            </Link>
-          </CardContent>
-        </Card>
-
-        <Card className="staggered-item hover-lift overflow-hidden border-primary/10">
-          <div className="h-1 bg-gradient-to-r from-primary/80 to-accent/40"></div>
-          <CardHeader>
-            <CardTitle className="flex items-center gap-2">
-              <Bookmark className="h-5 w-5 text-primary" />
-              Bookmarks
-            </CardTitle>
-            <CardDescription>
-              Access your saved verses, prayers and readings
-            </CardDescription>
-          </CardHeader>
-          <CardContent>
-            <Link to="/bookmarks">
-              <Button className="w-full">View Bookmarks</Button>
-            </Link>
-          </CardContent>
-        </Card>
       </div>
     </div>
   );
